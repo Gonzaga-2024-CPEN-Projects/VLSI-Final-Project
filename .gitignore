@@ -1,0 +1,7 @@
+# ignore everything
+*
+
+# Except:
+!.gitignore
+!Dockerfile
+!README.md

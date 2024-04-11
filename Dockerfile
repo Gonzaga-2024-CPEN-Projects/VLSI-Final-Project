@@ -20,7 +20,6 @@ RUN apt-get update && \
                            xterm:amd64 && \
     chmod 755 /$QUARTUS
 
-
 # create a normal user so we're not running as root
 # RUN export uid=1000 gid=1000 && \
 #     mkdir -p /home/developer && \
