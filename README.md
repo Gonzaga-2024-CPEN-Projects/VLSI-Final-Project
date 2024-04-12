@@ -1,6 +1,6 @@
 What goes in the rules file:
 ```shell
-filename: /etc/udev/rules.d/51-usbblater.rules
+filename: /etc/udev/rules.d/51-usbblaster.rules
 SUBSYSTEM=="usb", ATTRS{idVendor}=="09fb", ATTRS{idProduct}=="6001", MODE="0666"
 ```
 
