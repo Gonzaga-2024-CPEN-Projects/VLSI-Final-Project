@@ -4,7 +4,7 @@ filename: /etc/udev/rules.d/51-usbblater.rules
 SUBSYSTEM=="usb", ATTRS{idVendor}=="09fb", ATTRS{idProduct}=="6001", MODE="0666"
 ```
 
-Then run:
+Then run (This has to change for Mac):
 ```shell
 sudo udevadm control --reload-rules
 ```
