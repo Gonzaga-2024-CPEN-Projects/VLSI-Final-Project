@@ -61,5 +61,5 @@ RUN cd libpng-1.2.54 && \
     # sudo rm -r /$QUARTUS #****Nick commented this out becasue it failed
 # run from xterm to capture any stdio logging (not sure there is any, but can't hurt)
 # CMD xterm -e "/home/root/altera_lite/quartus/bin/quartus --64bit"
-CMD xterm 
+CMD xterm -e "sudo /home/root/altera_lite/quartus/bin/quartus"
  
