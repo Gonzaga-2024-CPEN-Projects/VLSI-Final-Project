@@ -42,8 +42,8 @@ RUN \
 USER developer
 ENV HOME /home/developer
 # install quartus as the user (not root)
-RUN    /$QUARTUS --mode unattended --unattendedmodeui none --installdir /home/developer/altera_lite --accept_eula 1 && \
-    sudo rm -f /$QUARTUS
-
+# RUN    /$QUARTUS --mode unattended --unattendedmodeui none --installdir /home/developer/altera_lite --accept_eula 1 && \
+RUN    /$QUARTUS --mode unattended --unattendedmodeui none --installdir /home/developer/altera_lite --accept_eula 1
+    # sudo rm -r /$QUARTUS #****Nick commented this out becasue it failed
 # run from xterm to capture any stdio logging (not sure there is any, but can't hurt)
 CMD xterm -e "/home/developer/altera_lite/quartus/bin/quartus --64bit"
