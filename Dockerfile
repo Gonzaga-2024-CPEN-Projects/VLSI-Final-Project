@@ -40,5 +40,10 @@ RUN    /$QUARTUS --mode unattended --unattendedmodeui none --installdir /home/de
     sudo rm -f /$QUARTUS && \
     sudo rm -f /$CYCLONE
 
+ARG START_SH=scripts/cmds_on_run.sh
+COPY $START_SH /cmds_on_run.sh
+
 # run from xterm to capture any stdio logging (not sure there is any, but can't hurt)
-CMD xterm && xterm -e "/home/developer/altera_lite/quartus/bin/quartus --64bit"  
+# CMD xterm
+CMD ./cmds_on_run.sh
+# && xterm -e "/home/developer/altera_lite/quartus/bin/quartus --64bit"  
