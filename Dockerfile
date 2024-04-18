@@ -1,5 +1,5 @@
 # libpng12 included in 16.04 but not in 18.04, so we use 16.04 for convenience
-FROM ubuntu:16.04
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -19,31 +19,48 @@ RUN apt-get update && \
                            libxrender1:amd64 \
                            libfontconfig1:amd64 \
                            libxext6:amd64 \
-                                libpng12-0:amd64 \
+                                # libpng12-0:amd64 \
                            xterm:amd64 && \
     chmod 755 /$QUARTUS
 
+RUN sudo apt install -y wget
+RUN sudo apt-get -y install make
+RUN sudo apt-get install -y zlib1g-dev
+RUN sudo apt-get -y install libtool
+RUN  wget http://archive.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng_1.2.54.orig.tar.xz
+RUN tar xvf  libpng_1.2.54.orig.tar.xz 
+
+
+RUN cd libpng-1.2.54 && \
+    ./autogen.sh && \
+    ./configure && \ 
+    make -j8 && \
+    sudo make install && \
+    sudo ldconfig
+
 # create a normal user so we're not running as root
 RUN export uid=1000 gid=1000 && \
-    mkdir -p /home/developer && \
-    echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
-    echo "developer:x:${uid}:" >> /etc/group && \
-    echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
-    chmod 0440 /etc/sudoers.d/developer && \
-    chown ${uid}:${gid} -R /home/developer
+    mkdir -p /home/boris && \
+    echo "boris:x:${uid}:${gid}:boris,,,:/home/boris:/bin/bash" >> /etc/passwd && \
+    echo "boris:x:${uid}:" >> /etc/group && \
+    echo "boris ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/boris && \
+    chmod 0440 /etc/sudoers.d/boris && \
+    chown ${uid}:${gid} -R /home/boris
 
 # switch to user so it installs from the user's context
-USER developer
-ENV HOME /home/developer
 # install quartus as the user (not root)
-RUN    /$QUARTUS --mode unattended --unattendedmodeui none --installdir /home/developer/altera_lite --accept_eula 1 && \
-    sudo rm -f /$QUARTUS && \
-    sudo rm -f /$CYCLONE
+RUN    /$QUARTUS --mode unattended --unattendedmodeui none --installdir /home/boris/altera_lite --accept_eula 1
+RUN sudo rm -f /$QUARTUS
+RUN sudo rm -f /$CYCLONE
 
 ARG START_SH=scripts/cmds_on_run.sh
 COPY $START_SH /cmds_on_run.sh
 RUN sudo chmod a+x cmds_on_run.sh
 
-# run from xterm to capture any stdio logging (not sure there is any, but can't hurt)
+USER boris
+ENV HOME /home/boris
+RUN mkdir /home/boris/DSD_Designs
+RUN chown boris /home/boris/DSD_Designs
+
+# container entry point.
 CMD ./cmds_on_run.sh
-# && xterm -e "/home/developer/altera_lite/quartus/bin/quartus --64bit"  
