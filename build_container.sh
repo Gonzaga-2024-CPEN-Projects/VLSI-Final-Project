@@ -9,5 +9,7 @@ echo "SUBSYSTEM=="usb", ATTRS{idVendor}=="09fb", ATTRS{idProduct}=="6001", MODE=
 sudo sudo udevadm control --reload-rules
 
 # Create the shared folder for the container
+mkdir $HOME/DSD_Designs
+sudo chmod 777 $HOME/DSD_Designs
 
 docker build -t quartus18 .
