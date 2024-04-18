@@ -22,14 +22,16 @@ RUN apt-get update && \
                                 # libpng12-0:amd64 \
                            xterm:amd64 && \
     chmod 755 /$QUARTUS
-
+    
 RUN sudo apt install -y wget
 RUN sudo apt-get -y install make
 RUN sudo apt-get install -y zlib1g-dev
 RUN sudo apt-get -y install libtool
-RUN  wget http://archive.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng_1.2.54.orig.tar.xz
+RUN wget http://archive.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng_1.2.54.orig.tar.xz
 RUN tar xvf  libpng_1.2.54.orig.tar.xz 
-
+    
+RUN apt-get update
+RUN apt-get install -y vim
 
 RUN cd libpng-1.2.54 && \
     ./autogen.sh && \
@@ -53,14 +55,16 @@ RUN    /$QUARTUS --mode unattended --unattendedmodeui none --installdir /home/bo
 RUN sudo rm -f /$QUARTUS
 RUN sudo rm -f /$CYCLONE
 
+RUN mkdir /home/boris/DSD_Designs
+RUN sudo chmod 777 /home/boris/DSD_Designs
+
+
 ARG START_SH=scripts/cmds_on_run.sh
 COPY $START_SH /cmds_on_run.sh
 RUN sudo chmod a+x cmds_on_run.sh
 
 USER boris
 ENV HOME /home/boris
-RUN mkdir /home/boris/DSD_Designs
-RUN chown boris /home/boris/DSD_Designs
 
 # container entry point.
 CMD ./cmds_on_run.sh
