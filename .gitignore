@@ -2,6 +2,8 @@
 *
 
 # Except:
+!/scripts
 !.gitignore
 !Dockerfile
 !README.md
+!*.sh
