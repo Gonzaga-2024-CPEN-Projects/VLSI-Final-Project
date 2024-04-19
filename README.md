@@ -14,6 +14,7 @@ build with:
 sudo docker buildx build -t q18 .
 ```
 run the container: 
+Open XQuartz manually
 ```shell
 export DISPLAY=localhost:0
 xhost +localhost
