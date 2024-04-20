@@ -1,15 +1,4 @@
 
-
-FROM ubuntu:22.04
-
-USER root
-ENV HOME /home/root
-
-
-RUN sudo apt install -y wget
-
-
-
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -28,12 +17,12 @@ RUN apt-get install sudo
 RUN sudo apt install -y wget
 
 
-ARG MODELSIM=ModelSimSetup-13.1.0.162.run
+ARG MODELSIM=ModelSimSetup-18.1.0.625-linux.run
 COPY $MODELSIM /$MODELSIM
 #  RUN wget http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/ModelSimSetup-13.1.0.162.run
-RUN chmod +x ModelSimSetup-13.1.0.162.run
+RUN chmod +x ModelSimSetup-18.1.0.625-linux.run
 
-RUN sudo dpkg --add-architecture i386
+# RUN sudo dpkg --add-architecture i386
 RUN apt-get update && \
     apt-get -y -qq install apt-utils sudo && \
     apt-get -y -qq install locales && locale-gen en_US.UTF-8 && \
@@ -58,17 +47,17 @@ RUN make -j$(nproc)
 
 
 WORKDIR /
-RUN sudo ./ModelSimSetup-13.1.0.162.run --mode unattended 
+RUN sudo ./ModelSimSetup-18.1.0.625-linux.run --mode unattended --accept_eula 1
 
 
-# RUN  cd /root/altera/13.1/modelsim_ase &&\
-WORKDIR /root/altera/13.1/modelsim_ase
+# # RUN  cd /root/altera/13.1/modelsim_ase &&\
+WORKDIR /root/intelFPGA/18.1/modelsim_ase
 RUN  cp ./vco ./vco_bkp  &&\
      sed -i -e 's/vco="linux_rh60" ;;/vco="linux" ;;/g' ./vco   &&\
      sed -i -e 's/MTI_VCO_MODE:-""/MTI_VCO_MODE:=-"32"/g' ./vco   &&\
      sed -i -e "/dir=`dirname $arg0`/a export LD_LIBRARY_PATH=\${dir}/lib32" ./vco > /dev/null 2>&1
 
-# ENV HOME /opt/modelsim/modelsim_ase
+# # ENV HOME /opt/modelsim/modelsim_ase
 RUN sudo mkdir lib32
 RUN sudo cp ~/freetype-2.10.0/objs/.libs/libfreetype.so* ./lib32
 
