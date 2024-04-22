@@ -5,7 +5,7 @@
 ## This will pass the usb blaster through to the docker container
 echo "Creating usb-blaster rules file..."
 sudo touch /etc/udev/rules.d/51-usbblaster.rules
-sudo mv usb_rules.txt /etc/udev/rules.d/51-usbblaster.rules
+sudo cp usb_rules.txt /etc/udev/rules.d/51-usbblaster.rules
 sudo udevadm control --reload-rules
 
 # Create the shared folder for the container
