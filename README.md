@@ -22,3 +22,27 @@ Then run with:
 ```
 
 url: http://my-cool-projects.blogspot.com/2018/10/how-to-dockerize-intel-quartus-1801.html
+
+# Windows Install Instructions
+
+1. Ensure that git lfs is installed:
+```shell
+$ git lfs install
+> Git LFS initialized.
+```
+
+2. Clone the repository:
+```shell
+git clone https://github.com/Gonzaga-2024-CPEN-Projects/VLSI-Final-Project.git
+```
+
+3. Start the `Docker Desktop` application.
+4. In WSL, run the `build container script` and enter your sudo password when prompted:
+```shell
+sudo ./build_container
+```
+
+5. Once the container is built, start it with the `start docker script`:
+```shell
+./start_docker
+```
