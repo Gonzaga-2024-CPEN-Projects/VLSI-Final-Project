@@ -55,6 +55,16 @@ RUN    /$QUARTUS --mode unattended --unattendedmodeui none --installdir /home/bo
 RUN sudo rm -f /$QUARTUS
 RUN sudo rm -f /$CYCLONE
 
+# ------ Install Eclipse ------
+# Instructions from: https://www.intel.com/content/www/us/en/support/programmable/articles/000086893.html
+# need java installed in the container for eclipse to work
+RUN sudo apt update && sudo apt-get install -y openjdk-8-jre
+
+# this archive holds eclipse, we copy to the container and then extract it into altera_lite/nios2eds/bin
+COPY eclipse-mars2.tar.gz /eclipse-mars2.tar.gz
+RUN tar -xf /eclipse-mars2.tar.gz --directory /home/boris/altera_lite/nios2eds/bin
+# ----------------------------
+
 RUN mkdir /home/boris/DSD_Designs
 RUN sudo chmod 777 /home/boris/DSD_Designs
 
