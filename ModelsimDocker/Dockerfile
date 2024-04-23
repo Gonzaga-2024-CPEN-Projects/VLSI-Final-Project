@@ -1,4 +1,6 @@
 
+
+
 FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -22,7 +24,7 @@ COPY $MODELSIM /$MODELSIM
 #  RUN wget http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/ModelSimSetup-13.1.0.162.run
 RUN chmod +x ModelSimSetup-18.1.0.625-linux.run
 
-# RUN sudo dpkg --add-architecture i386
+RUN sudo dpkg --add-architecture i386
 RUN apt-get update && \
     apt-get -y -qq install apt-utils sudo && \
     apt-get -y -qq install locales && locale-gen en_US.UTF-8 && \
@@ -36,6 +38,7 @@ RUN apt-get update && \
                                 # libpng12-0:amd64 \
                            xterm:amd64 
 RUN apt-get -y install build-essential
+
 
 RUN apt-get -y install gcc-multilib g++-multilib lib32z1 lib32stdc++6 lib32gcc-s1 expat:i386 fontconfig:i386 libfreetype6:i386 libexpat1:i386 libc6:i386 libgtk-3-0:i386 libcanberra0:i386 libpng16-16:i386 libice6:i386 libsm6:i386 libncurses5:i386 zlib1g:i386 libx11-6:i386 libxau6:i386 libxdmcp6:i386 libxext6:i386 libxft2:i386 libxrender1:i386 libxt6:i386 libxtst6:i386
 WORKDIR /home/root/
@@ -137,3 +140,84 @@ CMD xterm
 # USER developer
 # ENV    ALTERAPATH=/home/developer/intelFPGA/17.1                       \
 #        QUARTUS_64BIT=1                                              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# FROM ubuntu:22.04
+
+# ENV DEBIAN_FRONTEND noninteractive
+
+# # ARG QUARTUS=QuartusLiteSetup-18.1.0.625-linux.run
+
+# # COPY $QUARTUS /$QUARTUS
+
+
+   
+
+# USER root
+# ENV HOME /home/root
+# RUN apt-get update
+# RUN apt-get install sudo
+# RUN sudo apt install -y wget
+
+
+
+# RUN sudo dpkg --add-architecture i386
+
+# RUN apt-get update && \
+#     apt-get -y -qq install apt-utils sudo && \
+#     apt-get -y -qq install locales && locale-gen en_US.UTF-8 && \
+#     apt-get -y -qq install software-properties-common \
+#                            libglib2.0-0:amd64 \
+#                            libfreetype6:amd64 \
+#                            libsm6:amd64 \
+#                            libxrender1:amd64 \
+#                            libfontconfig1:amd64 \
+#                            libxext6:amd64 \
+#                                 # libpng12-0:amd64 \
+#                            xterm:amd64 
+# RUN apt-get -y install build-essential
+# RUN apt-get -y install gcc-multilib g++-multilib lib32z1 lib32stdc++6 lib32gcc-s1 expat:i386 fontconfig:i386 libfreetype6:i386 libexpat1:i386 libc6:i386 libgtk-3-0:i386 libcanberra0:i386 libpng16-16:i386 libice6:i386 libsm6:i386 libncurses5:i386 zlib1g:i386 libx11-6:i386 libxau6:i386 libxdmcp6:i386 libxext6:i386 libxft2:i386 libxrender1:i386 libxt6:i386 libxtst6:i386
+# WORKDIR /home/root/
+# RUN wget http://download.savannah.gnu.org/releases/freetype/freetype-2.10.0.tar.bz2
+# RUN tar -xjvf freetype-2.10.0.tar.bz2
+# WORKDIR /home/root/freetype-2.10.0
+# RUN ./configure --build=i686-pc-linux-gnu "CFLAGS=-m32" "CXXFLAGS=-m32" "LDFLAGS=-m32"
+# RUN make -j$(nproc)
+
+
+# WORKDIR /
+# ARG MODELSIM=ModelSimSetup-18.1.0.625-linux.run
+# COPY $MODELSIM /$MODELSIM
+# #  RUN wget http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/ModelSimSetup-13.1.0.162.run
+# RUN chmod +x ModelSimSetup-18.1.0.625-linux.run
+
+
+# WORKDIR /
+# RUN sudo ./ModelSimSetup-18.1.0.625-linux.run --mode unattended --accept_eula 1
+
+# WORKDIR /root/intelFPGA/18.1/modelsim_ase
+# RUN  cp ./vco ./vco_bkp  &&\
+#      sed -i -e 's/vco="linux_rh60" ;;/vco="linux" ;;/g' ./vco   &&\
+#      sed -i -e 's/MTI_VCO_MODE:-""/MTI_VCO_MODE:=-"32"/g' ./vco   &&\
+#      sed -i -e "/dir=`dirname $arg0`/a export LD_LIBRARY_PATH=\${dir}/lib32" ./vco > /dev/null 2>&1
+
+
+# RUN sudo mkdir lib32
+# RUN sudo cp ~/freetype-2.10.0/objs/.libs/libfreetype.so* ./lib32
+
+# CMD xterm
+
+
+
