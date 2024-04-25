@@ -14,7 +14,7 @@ test -f $filename && echo 'QuartusLiteSetup.run file exists.' || wget -O Quartus
 
 ## This will pass the usb blaster through to the docker container
 echo "Creating usb-blaster rules file..."
-sudo touch /etc/udev/rules.d/51-usbblaster.rules
+# sudo touch /etc/udev/rules.d/51-usbblaster.rules
 sudo cp usb_rules.txt /etc/udev/rules.d/51-usbblaster.rules
 sudo udevadm control --reload-rules
 

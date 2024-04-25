@@ -42,6 +42,15 @@ git clone https://github.com/Gonzaga-2024-CPEN-Projects/VLSI-Final-Project.git
 sudo ./build_container
 ```
 
+5. Once you've built the container, you can plug the usb to the FPGA into your computer.
+
+6. Open an Administrator instance of powershell and run (you will need to do this before
+you start the container everytime to give wsl access to the usb device).
+```shell
+usbipd wsl list
+usbipd wsl attach --busid <id>
+```
+
 5. Once the container is built, start it with the `start docker script`:
 ```shell
 ./start_docker
