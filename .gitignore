@@ -2,6 +2,10 @@
 *
 
 # Except:
+!/scripts
 !.gitignore
 !Dockerfile
 !README.md
+!*.sh
+!*.txt
+!cyclone-18.1.0.625.qdz
