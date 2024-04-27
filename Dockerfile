@@ -62,13 +62,15 @@ WORKDIR /
 
 ARG MODELSIM=ModelSimSetup-18.1.0.625-linux.run
 COPY $MODELSIM /$MODELSIM
+
 #  RUN wget http://download.altera.com/akdlm/software/acdsinst/13.1/162/ib_installers/ModelSimSetup-13.1.0.162.run
 RUN chmod +x ModelSimSetup-18.1.0.625-linux.run
-RUN sudo ./ModelSimSetup-18.1.0.625-linux.run --mode unattended --accept_eula 1
+RUN sudo ./ModelSimSetup-18.1.0.625-linux.run --mode unattended --installdir /home/boris/intelFPGA/18.1 --accept_eula 1
 
 
 # # RUN  cd /root/altera/13.1/modelsim_ase &&\
-WORKDIR /root/intelFPGA/18.1/modelsim_ase
+# WORKDIR /root/intelFPGA/18.1/modelsim_ase
+WORKDIR /home/boris/intelFPGA/18.1/modelsim_ase
 RUN  cp ./vco ./vco_bkp  &&\
      sed -i -e 's/vco="linux_rh60" ;;/vco="linux" ;;/g' ./vco   &&\
      sed -i -e 's/MTI_VCO_MODE:-""/MTI_VCO_MODE:=-"32"/g' ./vco   &&\
@@ -125,14 +127,15 @@ RUN sudo rm -f /$CYCLONE
 RUN mkdir /home/boris/DSD_Designs
 RUN sudo chmod 777 /home/boris/DSD_Designs
 
+WORKDIR /
+ARG START_SH=scripts/cmds_on_run.sh
+COPY $START_SH /cmds_on_run.sh
+RUN sudo chmod a+x cmds_on_run.sh
 
-# ARG START_SH=scripts/cmds_on_run.sh
-# COPY $START_SH /cmds_on_run.sh
-# RUN sudo chmod a+x cmds_on_run.sh
-
-# USER boris
+RUN usermod -aG sudo boris
+USER boris
 ENV HOME /home/boris
 
 # container entry point.
-# CMD ./cmds_on_run.sh
-CMD xterm
+CMD ./cmds_on_run.sh
+# CMD xterm
