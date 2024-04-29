@@ -158,8 +158,9 @@ RUN make
 RUN make install
 
 
-
-
+# Install Icarus
+# Following this tutorial: https://medium.com/@emkboruett/installing-icarus-verilog-and-gtkwave-on-ubuntu-for-verilog-simulation-d6d31eee2096
+RUN  apt install -y iverilog
 
 
 
