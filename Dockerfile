@@ -116,13 +116,53 @@ RUN cd libpng-1.2.54 && \
     sudo ldconfig
 
 
-
-
 # switch to user so it installs from the user's context
 # install quartus as the user (not root)
 RUN    /$QUARTUS --mode unattended --unattendedmodeui none --installdir /home/boris/altera_lite --accept_eula 1
 RUN sudo rm -f /$QUARTUS
 RUN sudo rm -f /$CYCLONE
+
+# Install gHDL
+# RUN sudo apt install gnat-10
+# Following this tutorial
+# https://ghdl.github.io/ghdl/quick_start/simulation/heartbeat/index.html
+
+WORKDIR /home/boris
+RUN sudo apt install -y git make gnat zlib1g-dev
+RUN git clone https://github.com/ghdl/ghdl
+WORKDIR /home/boris/ghdl
+RUN ./configure --prefix=/usr/local
+RUN make
+RUN sudo make install
+
+
+# Install gtkwave
+# *************************Need to download gtkwave file: https://sourceforge.net/projects/gtkwave/
+# How it was tested: cd into ghdl folder.
+# ghdl -a ../DSD_Designs/Heartbeat/heartbeat.vhdl 
+# ghdl -e heartbeat
+# ghdl -r heartbeat --wave=wave.ghw (manually terminal with ctl-C)
+# gtkwave wave.ghw
+WORKDIR /home/boris/
+ARG GTKWAVE=gtkwave-gtk3-3.3.116
+COPY $GTKWAVE /$GTKWAVE
+WORKDIR /gtkwave-gtk3-3.3.116
+RUN apt-get install -y pkg-config tcl-dev
+RUN apt-get install -y tk-dev
+RUN apt-get install -y libgtk2.0-dev
+RUN apt-get install -y gperf
+RUN apt-get install -y libbz2-dev
+
+RUN ./configure
+RUN make 
+RUN make install
+
+
+
+
+
+
+
 
 RUN mkdir /home/boris/DSD_Designs
 RUN sudo chmod 777 /home/boris/DSD_Designs
@@ -133,7 +173,7 @@ COPY $START_SH /cmds_on_run.sh
 RUN sudo chmod a+x cmds_on_run.sh
 
 RUN usermod -aG sudo boris
-USER boris
+# USER boris
 ENV HOME /home/boris
 
 # container entry point.
