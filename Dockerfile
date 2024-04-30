@@ -11,8 +11,6 @@ COPY $QUARTUS /$QUARTUS
 COPY $CYCLONE /$CYCLONE
 
 
-
-
 # Install Modelsim
 
 USER root
@@ -79,7 +77,6 @@ RUN  cp ./vco ./vco_bkp  &&\
 # # ENV HOME /opt/modelsim/modelsim_ase
 RUN sudo mkdir lib32
 RUN sudo cp ~/freetype-2.10.0/objs/.libs/libfreetype.so* ./lib32
-
 
 
 # End install modelsim
@@ -153,9 +150,10 @@ RUN sudo make install
 # ghdl -e heartbeat
 # ghdl -r heartbeat --wave=wave.ghw (manually terminal with ctl-C)
 # gtkwave wave.ghw
-WORKDIR /home/boris/
-ARG GTKWAVE=gtkwave-gtk3-3.3.116
+WORKDIR /
+ARG GTKWAVE=gtkwave-gtk3-3.3.116.tar.gz
 COPY $GTKWAVE /$GTKWAVE
+RUN tar xvf $GTKWAVE
 WORKDIR /gtkwave-gtk3-3.3.116
 RUN apt-get install -y pkg-config tcl-dev
 RUN apt-get install -y tk-dev
@@ -171,7 +169,6 @@ RUN make install
 # Install Icarus
 # Following this tutorial: https://medium.com/@emkboruett/installing-icarus-verilog-and-gtkwave-on-ubuntu-for-verilog-simulation-d6d31eee2096
 RUN  apt install -y iverilog
-
 
 
 
