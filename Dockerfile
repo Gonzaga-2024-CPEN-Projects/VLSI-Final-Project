@@ -174,7 +174,7 @@ COPY $START_SH /cmds_on_run.sh
 RUN sudo chmod a+x cmds_on_run.sh
 
 RUN usermod -aG sudo boris
-# USER boris
+# USER boris    #Still need to test with the boris user.....
 ENV HOME /home/boris
 
 # container entry point.
