@@ -6,11 +6,11 @@ echo "Downloading Quartus, Cyclone, and ModelSim files..."
 
 filename='ModelSimSetup-18.1.0.625-linux.run'
 # Don't download the file if it already exists.
-test -f $filename && echo 'ModelSim.run file exists.' || wget -O ModelSimSetup-18.1.0.625-linux.run https://cdrdv2.intel.com/v1/dl/getContent/750368/750371?filename=ModelSimSetup-18.1.0.625-linux.run
+test -f $filename && echo 'ModelSim.run file exists.' || wget -O ModelSimSetup-18.1.0.625-linux.run https://cdrdv2.intel.com/v1/dl/getContent/750368/750371?filename=ModelSimSetup-18.1.0.625-linux.run --no-check-certificate --no-proxy
 
 filename='QuartusLiteSetup-18.1.0.625-linux.run'
 # Don't download the file if it already exists.
-test -f $filename && echo 'QuartusLiteSetup.run file exists.' || wget -O QuartusLiteSetup-18.1.0.625-linux.run https://cdrdv2.intel.com/v1/dl/getContent/665988/710188?filename=QuartusLiteSetup-18.1.0.625-linux.run
+test -f $filename && echo 'QuartusLiteSetup.run file exists.' || wget -O QuartusLiteSetup-18.1.0.625-linux.run https://cdrdv2.intel.com/v1/dl/getContent/665988/710188?filename=QuartusLiteSetup-18.1.0.625-linux.run --no-check-certificate --no-proxy
 
 
 ## This will pass the usb blaster through to the docker container
