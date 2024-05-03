@@ -62,7 +62,7 @@ RUN sudo apt update && sudo apt-get install -y openjdk-8-jre
 
 # this archive holds eclipse, we copy to the container and then extract it into altera_lite/nios2eds/bin
 COPY eclipse-mars2.tar.gz /eclipse-mars2.tar.gz
-RUN tar -xf /eclipse-mars2.tar.gz --directory /home/boris/altera_lite/nios2eds/bin
+RUN tar -xvzf /eclipse-mars2.tar.gz --directory /home/boris/altera_lite/nios2eds/bin
 # ----------------------------
 
 RUN mkdir /home/boris/DSD_Designs
