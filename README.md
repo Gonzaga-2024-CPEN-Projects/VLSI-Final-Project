@@ -55,3 +55,11 @@ usbipd wsl attach --busid <id>
 ```shell
 ./start_docker
 ```
+
+# Errors:
+
+- if you get the "xterm: Xt error: cannot open display" error...
+
+```shell
+xhost si:localuser:root
+```
