@@ -159,6 +159,8 @@ RUN apt-get install -y tk-dev
 RUN apt-get install -y libgtk2.0-dev
 RUN apt-get install -y gperf
 RUN apt-get install -y libbz2-dev
+RUN apt-get install -y libcanberra-gtk-module
+RUN apt-get install -y libcanberra-gtk-module:i386
 
 RUN ./configure
 RUN make 

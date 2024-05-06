@@ -32,6 +32,7 @@ Note: You need to have `Docker Desktop` running in the background before you att
    connections on your host machine through to wsl. **Do this before you start the container**.
 In an administrator instance of powershell:
 ```shell
+winget install usbipd
 usbipd wsl list
 usbipd wsl attach --busid <id>
 ```
