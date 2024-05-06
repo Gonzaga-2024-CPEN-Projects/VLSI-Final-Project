@@ -25,8 +25,29 @@ Note: You need to have `Docker Desktop` running in the background before you att
 # Instructions for MacOS users
 1. ... (nick)
 
+# General Usage
+
+## usb-passthrough
+1. To flash your hardware design and software to an Altera FPGA board you'll need to pass the usb
+   connections on your host machine through to wsl. **Do this before you start the container**.
+In an administrator instance of powershell:
+```shell
+usbipd wsl list
+usbipd wsl attach --busid <id>
+```
+
+## Quartus and Modelsim
+- When you start the docker container, Quartus will open and an instance of xterm will open. 
+- You can use Quartus like you normally would. To make sure that your project save between
+  running instances of the container make sure you store them in `/home/boris/DSD_Designs`.
+- Before you envoke a script with modelsim commands in it, it might be helpful to source
+  the `.bash_profile` and `.bashrc` files in the `/home/boris/DSD_Designs` dir.
+
 ## Building from scratch on Windows
 - You do not need to do these steps to use the docker container, only to make modifications to it.
+
+- To build from scratch, you need to download the files in [this repository] to the cloned repo on 
+  your machine.
 
 1. Ensure that git lfs is installed:
 ```shell
@@ -61,6 +82,8 @@ usbipd wsl attach --busid <id>
 
 ## Building from scratch on MacOS
 - You do not need to do these steps to use the docker container, only to make modifications to it.
+- To build from scratch, you need to download the files in [this repository] to the cloned repo on 
+  your machine.
 1. ... (nick)
 
 # Errors:
@@ -72,3 +95,4 @@ xhost si:localuser:root
 ```
 
 [here]:https://learn.microsoft.com/en-us/windows/wsl/install
+[this repository]:https://drive.google.com/drive/folders/1c2Sim5qkLjLW3gy5qTacGj383V3qEaad?usp=sharing
