@@ -1,0 +1,6 @@
+alias ls='ls -F'
+alias ll='ls -lA'
+alias la='ls -A'
+alias cdh='cd /home/boris'
+alias quartus='/home/boris/altera_lite/quartus/bin/quartus'
+alias modelsim='/home/boris/intelFPGA/18.1/modelsim_ase/bin/vsim'

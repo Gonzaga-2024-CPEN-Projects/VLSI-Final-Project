@@ -1,0 +1,8 @@
+PATH=${PATH}
+Q_BIN="/home/boris/altera_lite/18.1/quartus"
+M_BIN="/home/boris/intelFPGA/18.1/modelsim_ase/bin"
+# I_BIN="/mnt/c/iverilog/bin"
+# G_BIN="/mnt/c/iverilog/gtkwave/bin"
+
+# export PATH="$Q_BIN:$M_BIN:$I_BIN:$G_BIN:$PATH"
+export PATH="$Q_BIN:$M_BIN:$PATH"
