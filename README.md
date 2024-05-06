@@ -33,7 +33,7 @@ Note: You need to have `Docker Desktop` running in the background before you att
 In an administrator instance of powershell:
 ```shell
 winget install usbipd
-usbipd wsl list
+usbipd list
 usbipd wsl attach --busid <id>
 ```
 
