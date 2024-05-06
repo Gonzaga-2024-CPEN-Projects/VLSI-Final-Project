@@ -22,7 +22,7 @@ Note: You need to have `Docker Desktop` running in the background before you att
 ./start_docker.sh
 ```
 
-# Instructions for MacOS users
+# Instructions for MacOS Users
 1. ... (nick)
 
 # General Usage
