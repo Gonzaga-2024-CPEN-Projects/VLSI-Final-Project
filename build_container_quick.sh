@@ -14,5 +14,8 @@ mkdir -p $HOME/DSD_Designs
 # be able to do anything with it on our system or the docker.
 sudo chmod 777 $HOME/DSD_Designs
 
+cp scripts/bash_profile $HOME/DSD_Designs/.bash_profile
+cp scripts/bashrc $HOME/DSD_Designs/.bashrc
+
 echo "pulling the image from docker"
 docker pull "iflury/quartus18:version1.0"
