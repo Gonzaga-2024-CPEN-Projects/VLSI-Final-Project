@@ -2,7 +2,7 @@
 *
 
 # Except:
-!/scripts
+!/scripts/
 !.gitignore
 !Dockerfile
 !README.md
