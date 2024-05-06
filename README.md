@@ -1,29 +1,32 @@
-What goes in the rules file:
+# Instructions for Windows Users:
 
-Note: I have experienced some instances of not being
-able to build the container unless Docker Desktop is
-running. So make sure to start that before running
-`build_container.sh`.
+1. To use this docker container, you need to install docker desktop and wsl
+2. You can install docker desktop from the microsoft store, and instructions to install WSL are [here].
 
+Clone the repo in a wsl terminal with:
 ```shell
-filename: /etc/udev/rules.d/51-usbblaster.rules
-SUBSYSTEM=="usb", ATTRS{idVendor}=="09fb", ATTRS{idProduct}=="6001", MODE="0666"
+git clone https://github.com/Gonzaga-2024-CPEN-Projects/VLSI-Final-Project.git
 ```
 
-
-build with:
+3. Once you have the repo downloaded, navigate to it and run the following.
 ```shell
-sudo ./build_container.sh
+sudo chmod a+x build_container_quick.sh
+sudo ./build_container_quick.sh
 ```
 
-Then run with:
+Note: You need to have `Docker Desktop` running in the background before you attempt to
+      run the build script above.
+
+4. Now that you have build the container, you can run the container with: (you may need to use sudo)
 ```shell
 ./start_docker.sh
 ```
 
-url: http://my-cool-projects.blogspot.com/2018/10/how-to-dockerize-intel-quartus-1801.html
+# Instructions for MacOS users
+1. ... (nick)
 
-# Windows Install Instructions
+## Building from scratch on Windows
+- You do not need to do these steps to use the docker container, only to make modifications to it.
 
 1. Ensure that git lfs is installed:
 ```shell
@@ -39,7 +42,7 @@ git clone https://github.com/Gonzaga-2024-CPEN-Projects/VLSI-Final-Project.git
 3. Start the `Docker Desktop` application.
 4. In WSL, run the `build container script` and enter your sudo password when prompted:
 ```shell
-sudo ./build_container
+sudo ./build_container_from_scratch.sh
 ```
 
 5. Once you've built the container, you can plug the usb to the FPGA into your computer.
@@ -56,6 +59,10 @@ usbipd wsl attach --busid <id>
 ./start_docker
 ```
 
+## Building from scratch on MacOS
+- You do not need to do these steps to use the docker container, only to make modifications to it.
+1. ... (nick)
+
 # Errors:
 
 - if you get the "xterm: Xt error: cannot open display" error...
@@ -63,3 +70,5 @@ usbipd wsl attach --busid <id>
 ```shell
 xhost si:localuser:root
 ```
+
+[here]:https://learn.microsoft.com/en-us/windows/wsl/install

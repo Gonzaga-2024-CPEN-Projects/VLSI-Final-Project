@@ -31,4 +31,4 @@ sudo chmod 777 $HOME/DSD_Designs
 cp scripts/bash_profile $HOME/DSD_Designs/.bash_profile
 cp scripts/bashrc $HOME/DSD_Designs/.bashrc
 
-docker build -t quartus18 .
+docker build -t iflury/quartus18:version1.0 .
