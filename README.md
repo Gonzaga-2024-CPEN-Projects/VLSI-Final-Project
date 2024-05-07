@@ -24,7 +24,7 @@ Note: You need to have `Docker Desktop` running in the background before you att
 
 # Instructions for MacOS Users
 As of May 2024, Docker does not support USB passthrough on Mac. The Docker container will work on MAC, but programming the FPGA will not since the container cannot access the USB port. To use the container on a Mac, install XQuartz: https://www.xquartz.org/  and proceed with the instructions, skipping the wsl steps.
-Run these steps before starting the container:
+Run these steps additional steps before starting the container:
 ```shell
 export DISPLAY=localhost:0
 xhost +localhost
