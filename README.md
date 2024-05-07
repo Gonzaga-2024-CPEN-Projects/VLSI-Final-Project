@@ -53,7 +53,7 @@ usbipd wsl attach --busid <id>
 - Before you envoke a script with modelsim commands in it, it might be helpful to source
   the `.bash_profile` and `.bashrc` files in the `/home/boris/DSD_Designs` dir.
 
-## Building from scratch on Windows
+## Building from scratch
 - You do not need to do these steps to use the docker container, only to make modifications to it.
 
 - To build from scratch, you need to download the files in [this repository] to the cloned repo on 
@@ -89,12 +89,6 @@ usbipd wsl attach --busid <id>
 ```shell
 ./start_docker
 ```
-
-## Building from scratch on MacOS
-- You do not need to do these steps to use the docker container, only to make modifications to it.
-- To build from scratch, you need to download the files in [this repository] to the cloned repo on 
-  your machine.
-1. ... (nick)
 
 # Errors:
 
